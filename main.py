@@ -2,6 +2,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
+#from cv2 import cv
 
 #img = plt.imread('images/1.jpg')/float(2**8)
 
@@ -25,4 +26,5 @@ input_image1 = cv2.imread('images/1.jpg', 0)
 # Low and high pass filter
 output_image1 = low_pass_filter(input_image1)
 #succeed2, output_image2 = high_pass_filter(input_image1)
-cv2.imwrite("output_name1", output_image1)
+plt.imsave("images/out1.jpg", output_image1, cmap='')
+plt.imshow(output_image1, cmap='gray')
