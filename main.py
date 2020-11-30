@@ -6,8 +6,6 @@ import cv2
 #img = plt.imread('images/1.jpg')/float(2**8)
 
 
-
-
 def low_pass_filter(img_in):  # Write low pass filter here
     dft = cv2.dft(np.float32(img_in), flags=cv2.DFT_COMPLEX_OUTPUT)
     dft_shift = np.fft.fftshift(dft)
@@ -16,7 +14,7 @@ def low_pass_filter(img_in):  # Write low pass filter here
     rows, cols = img_in.shape
     crow, ccol = rows / 2, cols / 2
     mask = np.zeros((rows, cols, 2), np.uint8)
-    mask[crow - 10: crow + 10, ccol - 10: ccol + 10] = 1
+    mask[int(crow) - 10: int(crow) + 10, int(ccol) - 10: int(ccol) + 10] = 1
     fshift = dft_shift * mask
     f_ishift = np.fft.ifftshift(fshift)
     img_back = cv2.idft(f_ishift, flags=cv2.DFT_SCALE | cv2.DFT_REAL_OUTPUT)
