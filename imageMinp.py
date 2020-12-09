@@ -83,10 +83,12 @@ def image_minp(image_in, R= '0' , type='lowpass' ):
 #input from the user
 
 
-img = cv2.imread('images/cat_n10.jpg',0)
-type = input ("Enter the type of the filter:")
+
+imag= input ('The image path: ')
+type = input ("Type of the filter: ")
 r= input ("Enter the degree of rotation if no rotation needed enter 0 :")
-# low pass filter
+
+img = cv2.imread(imag,0)
 out= image_minp(img, r, type)
 cv2.imwrite('images/out.jpg', out)
 
