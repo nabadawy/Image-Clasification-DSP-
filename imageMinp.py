@@ -32,14 +32,14 @@ def rotate (image_in, R='0'):
 
 def image_minp(image_in, R= '0' , type='lowpass' ):
     if type == 'lowpass':
-        m , n = image_in.shape
+        m , n, k = image_in.shape
 
         # Develop Averaging filter(3, 3) mask
         mask = np.ones ( [ 3 , 3 ] , dtype = int )
         mask = mask / 9
 
         # Convolve the 3X3 mask over the image
-        img_new = np.zeros ( [ m , n ] )
+        img_new = np.zeros ( [ m , n, k ] )
 
         for i in range ( 1 , m - 1 ) :
             for j in range ( 1 , n - 1 ) :
@@ -56,12 +56,13 @@ def image_minp(image_in, R= '0' , type='lowpass' ):
         img_new= rotate(img_new, R)
         return img_new
     if type == 'median':
+        image_in = cv2.imread(imag,0)
         m , n = image_in.shape
 
         # Traverse the image. For every 3X3 area,
         # find the median of the pixels and
         # replace the ceter pixel by the median
-        img_new1 = np.zeros ( [ m , n ] )
+        img_new1 = np.zeros ( [ m , n] )
 
         for i in range(1, m - 1):
             for j in range(1, n - 1):
@@ -83,14 +84,14 @@ def image_minp(image_in, R= '0' , type='lowpass' ):
         return img_new1
 
     if type == 'gaussian' :
-        m , n = image_in.shape
+        m , n, k = image_in.shape
 
         # Develop Averaging filter(3, 3) mask
         mask = gauss2D((3,3), 1)
 
 
         # Convolve the 3X3 mask over the image
-        img_new = np.zeros ( [ m , n ] )
+        img_new = np.zeros ( [ m , n, k ] )
 
         for i in range ( 1 , m - 1 ) :
             for j in range ( 1 , n - 1 ) :
@@ -126,7 +127,7 @@ imag= input ('The image path: ')
 type = input ("Type of the filter: ")
 r= input ("Enter the degree of rotation if no rotation needed enter 0 :")
 
-img = cv2.imread(imag,0)
+img = cv2.imread(imag)
 out= image_minp(img, r, type)
 cv2.imwrite('images/out.jpg', out)
 
